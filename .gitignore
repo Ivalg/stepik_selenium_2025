@@ -1,0 +1,35 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+data.py
