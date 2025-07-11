@@ -16,8 +16,15 @@ def driver(request):
     options = Options()
     user_language = request.config.getoption('language')
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
-
-    driver = webdriver.Chrome(options=options)
+    browser_name = request.config.getoption('browser_name')
+    if browser_name == 'chrome':
+        print('\nstart chrome browser for test..')
+        driver = webdriver.Chrome(options=options)
+    elif browser_name == 'firefox':
+        print('\nstart firefox browser for test..')
+        driver = webdriver.Firefox()
+    else:
+        raise pytest.UsageError('--browser_name should be chrome or firefox')
     yield driver
     driver.quit()
     print('\nquit browser..')
