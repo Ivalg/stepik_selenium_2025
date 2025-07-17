@@ -20,5 +20,5 @@ class ProductPageLocator:
     ADD_BASKET_BUTTON = (By.XPATH, '//button[@class="btn btn-lg btn-primary btn-add-to-basket"]')
     BOOK_TITLE = (By.XPATH, '//h1')
     BOOK_PRICE = (By.XPATH, '//p[@class="price_color"]')
-    SUCCESS_MESSAGE = (By.XPATH, '//div[contains(@class, "alert-success") and contains(., "добавлен в вашу корзину")]')
-    BASKET_SUM = (By.XPATH, '//div[contains(@class, "alert-info") and contains(., "Стоимость корзины")]')
+    SUCCESS_MESSAGE = (By.XPATH, '//div[contains(@class, "alert-success")]//strong')
+    BASKET_SUM = (By.XPATH, '//div[3]/div/p[1]/strong')
