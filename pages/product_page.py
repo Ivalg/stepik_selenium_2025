@@ -4,7 +4,7 @@ from .locators import ProductPageLocator
 
 class ProductPage(BasePage):
     def should_be_product_page(self):
-        self.should_be_newYear_url()
+        self.should_be_product_url_with_newyear()
         self.add_to_basket()
         self.get_book_title()
 
