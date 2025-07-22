@@ -3,6 +3,9 @@ from .locators import MainPageLocators
 
 
 class MainPage(BasePage):
+    def __init__(self, *args, **kwargs):
+        super(MainPage, self).__init__(*args, **kwargs)
+
     def go_to_login_page(self):  # переходим на страницу логина
         login_link = self.driver.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()

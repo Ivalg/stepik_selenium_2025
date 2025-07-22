@@ -1,4 +1,5 @@
 import math
+from .locators import BasePageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
@@ -12,10 +13,21 @@ class BasePage:
         self.url = url
         # self.driver.implicitly_wait(timeout)
 
+    def go_to_login_page(self):
+        """Переходим на страницу логина"""
+        link = self.driver.find_element(*BasePageLocators.LOGIN_LINK)
+        link.click()
+
+    def should_be_login_link(self):
+        """Проверяем наличие кнопки 'Войти или зарегистрироваться'"""
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
     def open(self):
+        """Открываем страницу"""
         return self.driver.get(self.url)
 
     def is_element_present(self, how, what):
+        """Находим элемент на странице"""
         try:
             self.driver.find_element(how, what)
         except NoSuchElementException:
