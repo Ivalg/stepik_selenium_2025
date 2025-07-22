@@ -16,7 +16,7 @@ class LoginPageLocators:
     REGISTER_FORM_BUTTON = (By.XPATH, '//button[@name="registration_submit"]')
 
 
-class ProductPageLocator:
+class ProductPageLocators:
     ADD_BASKET_BUTTON = (By.XPATH, '//button[@class="btn btn-lg btn-primary btn-add-to-basket"]')
     BOOK_TITLE = (By.XPATH, '//h1')
     BOOK_PRICE = (By.XPATH, '//p[@class="price_color"]')

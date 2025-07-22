@@ -3,13 +3,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
 
 
 class BasePage:
     def __init__(self, driver, url, timeout=10):
         self.driver = driver
         self.url = url
-        self.driver.implicitly_wait(timeout)
+        # self.driver.implicitly_wait(timeout)
 
     def open(self):
         return self.driver.get(self.url)
@@ -18,6 +19,23 @@ class BasePage:
         try:
             self.driver.find_element(how, what)
         except NoSuchElementException:
+            return False
+        return True
+
+    def is_not_element_present(self, how, what, timeout=4):
+        """ Элемент НЕ появляется на странице в течение заданного времени"""
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+        return False
+
+    def is_disappeared(self, how, what, timeout=4):
+        """Элемент исчезает в течение заданного времени"""
+        try:
+            WebDriverWait(self.driver, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
             return False
         return True
 
