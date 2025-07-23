@@ -1,5 +1,6 @@
 import math
 from .locators import BasePageLocators
+from .locators import MainPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
@@ -13,14 +14,22 @@ class BasePage:
         self.url = url
         # self.driver.implicitly_wait(timeout)
 
+    def should_be_login_link(self):
+        """Проверяем наличие кнопки 'Войти или зарегистрироваться'"""
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
     def go_to_login_page(self):
         """Переходим на страницу логина"""
         link = self.driver.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
-    def should_be_login_link(self):
-        """Проверяем наличие кнопки 'Войти или зарегистрироваться'"""
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+    def should_be_basket_link(self):
+        """Проверяем наличие кнопки 'Посмотреть корзину'"""
+        assert self.is_element_present(*BasePageLocators.VIEW_BASKET_BUTTON), "View Basket button is not presented"
+
+    def go_to_basket_page(self):
+        view_basket_button = self.driver.find_element(*BasePageLocators.VIEW_BASKET_BUTTON)
+        view_basket_button.click()
 
     def open(self):
         """Открываем страницу"""
@@ -35,7 +44,7 @@ class BasePage:
         return True
 
     def is_not_element_present(self, how, what, timeout=4):
-        """ Элемент НЕ появляется на странице в течение заданного времени"""
+        """Элемент НЕ появляется на странице в течение заданного времени"""
         try:
             WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
