@@ -60,6 +60,10 @@ class BasePage:
             return False
         return True
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), 'User icon is not presented,' \
+                                                                     ' probably unauthorised user'
+
     def solve_quiz_and_get_code(self):
         try:  # Ожидаем появление первого алерта (с задачей)
             alert = WebDriverWait(self.driver, 5).until(EC.alert_is_present())
@@ -84,3 +88,4 @@ class BasePage:
         except Exception as e:
             print(f'Error solving quiz: {str(e)}')
             return None
+

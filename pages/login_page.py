@@ -25,6 +25,12 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTER_FORM_BUTTON), \
             'Register button is not visible'
 
-    # def should_be_correct_forgot_password_link(self): # разобраться с языками
-    #     forgot_link = self.driver.find_element(*LoginPageLocators.LOGIN_FORGOT_LINK)
-    #     assert forgot_link.is_element_present(), "Forgot password link is not visible"
+    def register_new_user(self, email, password):
+        reg_email_field = self.driver.find_element(*LoginPageLocators.REGISTER_EMAIL_FIELD)
+        reg_email_field.send_keys(email)
+        reg_pass_field = self.driver.find_element(*LoginPageLocators.REGISTER_PASSWORD_FIELD)
+        reg_pass_field.send_keys(password)
+        reg_pass_conf_field = self.driver.find_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM_FIELD)
+        reg_pass_conf_field.send_keys(password)
+        reg_button = self.driver.find_element(*LoginPageLocators.REGISTER_FORM_BUTTON)
+        reg_button.click()

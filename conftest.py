@@ -12,6 +12,7 @@ def pytest_addoption(parser):
     parser.addoption('--headless', action='store', default='false',
                      help="Open a browser invisible, without GUI is used by default")
 
+
 @pytest.fixture()
 def driver(request):
     print('\nstart browser')
