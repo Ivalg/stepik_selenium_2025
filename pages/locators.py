@@ -28,7 +28,7 @@ class ProductPageLocators:
     BOOK_TITLE = (By.XPATH, '//h1')
     BOOK_PRICE = (By.XPATH, '//p[@class="price_color"]')
     SUCCESS_MESSAGE = (By.XPATH, '//div[contains(@class, "alert-success")]//strong')
-    BASKET_SUM = (By.XPATH, '//div[3]/div/p[1]/strong')
+    BASKET_SUM_MESSAGE = (By.XPATH, '//div[3]/div/p[1]/strong')
 
 
 class BasketPageLocators:

@@ -7,7 +7,8 @@ import faker
 fake = faker.Faker()
 
 
-@pytest.mark.user
+@pytest.mark.need_review
+# @pytest.mark.user
 class TestUserAddToBasketFormProductPage:
     @pytest.fixture(scope='function', autouse=True)
     def setup(self, driver):
@@ -21,27 +22,22 @@ class TestUserAddToBasketFormProductPage:
         self.login_page.should_be_authorized_user()
 
     def test_user_cant_see_success_message(self, driver):
-        product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
-        page = ProductPage(driver, product_link)
-        page.open()
-        page.should_not_be_success_message()
+        self.product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
+        self.page = ProductPage(driver, self.product_link)
+        self.page.open()
+        time.sleep(4)
+        self.page.should_not_be_success_message()
 
     def test_user_can_add_product_to_basket(self, driver):
-        product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
-        page = ProductPage(driver, product_link)
-        page.open()
-        book_title = page.get_book_title()
-        book_price = page.get_book_price()
-        page.add_to_basket()
-        # page.solve_quiz_and_get_code()
-        success_message = page.get_success_message()
-        basket_sum = page.get_basket_sum()
-
-        assert book_title == success_message.text
-        assert book_price == basket_sum.text
+        self.product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
+        self.page = ProductPage(driver, self.product_link)
+        self.page.open()
+        self.page.add_to_basket()
+        self.page.success_massage_has_product_title()
+        self.page.success_massage_has_basket_sum()
 
 
-@pytest.mark.skip
+@pytest.mark.need_review
 @pytest.mark.parametrize('link',
                          ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
                           "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
@@ -59,15 +55,10 @@ def test_guest_can_add_product_to_basket(driver, link):
     product_link = link
     page = ProductPage(driver, product_link)
     page.open()
-    book_title = page.get_book_title()
-    book_price = page.get_book_price()
     page.add_to_basket()
     page.solve_quiz_and_get_code()
-    success_message = page.get_success_message()
-    basket_sum = page.get_basket_sum()
-
-    assert book_title == success_message.text
-    assert book_price == basket_sum.text
+    page.success_massage_has_product_title()
+    page.success_massage_has_basket_sum()
 
 
 @pytest.mark.xfail(reason="сообщение появляется")
@@ -102,12 +93,12 @@ def test_guest_should_see_login_link_on_product_page(driver):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(driver):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(driver, link)
     page.open()
     page.go_to_login_page()
-    time.sleep(3)
 
 
 def test_guest_should_see_basket_url(driver):
@@ -119,6 +110,7 @@ def test_guest_should_see_basket_url(driver):
     login_page.should_be_basket_url()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
     product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
     page = ProductPage(driver, product_link)

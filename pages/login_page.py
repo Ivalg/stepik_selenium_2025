@@ -7,7 +7,6 @@ class LoginPage(BasePage):
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
-        # self.should_be_correct_forgot_password_link()
 
     def should_be_login_url(self):
         assert 'login' in self.driver.current_url, 'URL does not contain "login"'
