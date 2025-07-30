@@ -1,4 +1,3 @@
-import time
 import pytest
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
@@ -25,7 +24,6 @@ class TestUserAddToBasketFormProductPage:
         self.product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
         self.page = ProductPage(driver, self.product_link)
         self.page.open()
-        time.sleep(4)
         self.page.should_not_be_success_message()
 
     def test_user_can_add_product_to_basket(self, driver):
