@@ -1,4 +1,5 @@
 import pytest
+import allure
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
@@ -6,6 +7,7 @@ import faker
 fake = faker.Faker()
 
 
+@allure.feature('user')
 @pytest.mark.need_review
 # @pytest.mark.user
 class TestUserAddToBasketFormProductPage:
@@ -35,6 +37,7 @@ class TestUserAddToBasketFormProductPage:
         self.page.success_massage_has_basket_sum()
 
 
+@allure.feature('new_year_promo')
 @pytest.mark.need_review
 @pytest.mark.parametrize('link',
                          ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",

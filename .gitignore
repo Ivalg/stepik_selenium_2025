@@ -33,3 +33,6 @@ htmlcov/
 .DS_Store
 
 data.py
+
+# allure report
+results/

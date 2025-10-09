@@ -1,3 +1,4 @@
+
 import pytest
 import os
 from selenium import webdriver
@@ -9,7 +10,7 @@ def pytest_addoption(parser):
                      help='Choose browser language, please ("fr", "ru", "en", "es")')
     parser.addoption('--browser_name', action='store', default='chrome',
                      help='Choose browser: chrome or firefox')
-    parser.addoption('--headless', action='store', default='false',
+    parser.addoption('--headless', action='store', default='true',
                      help="Open a browser invisible, without GUI is used by default")
 
 
