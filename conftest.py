@@ -25,7 +25,7 @@ def driver(request):
     if browser_name == 'chrome':
         print('\nstart chrome browser for test..')
         if headless == 'true':
-            options.add_argument('headless')
+            options.add_argument('headless=new')
         driver = webdriver.Chrome(options=options)
     elif browser_name == 'firefox':
         print('\nstart firefox browser for test..')

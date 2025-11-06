@@ -1,6 +1,17 @@
 name: Automated tests
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default: all_tests
+        type: choice
+        options:
+          - all_tests
+          - need_review_tests
+          - new_year_promo_tests
 
 jobs:
   test:
@@ -17,5 +28,12 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
         run: pip install -r requirements.txt
-      - name: Run tests
+      - name: all_tests
+        if: "github.event.inputs.deployment_target == 'all_tests'"
         run: pytest
+      - name: need_review_tests
+        if: "github.event.inputs.deployment_target == 'need_review_tests'"
+        run: pytest -m need_review
+      - name: new_year_promo_tests
+        if: "github.event.inputs.deployment_target == 'new_year_promo_tests'"
+        run: pytest -m new_year_promo
